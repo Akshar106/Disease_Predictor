@@ -9,6 +9,6 @@
 - [Diabetes DataSet](https://github.com/Akshar106/Disease_Predictor/blob/main/All%20Datasets/diabetes.csv)
 - [Heart Diseases DataSet](https://github.com/Akshar106/Disease_Predictor/blob/main/All%20Datasets/heart.csv)
 
-## Jupyter Notebook Files
+## All Jupyter Notebook Files
 
  - [Diabetes](https://github.com/Akshar106/Disease_Predictor/blob/main/All%20Jupyter%20Notebook%20Files/Diabetes_Prediction.ipynb)
