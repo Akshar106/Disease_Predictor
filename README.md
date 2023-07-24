@@ -7,6 +7,7 @@
 ## All DataSets
 
 - [Diabetes DataSet](https://github.com/Akshar106/Disease_Predictor/blob/main/All%20Datasets/diabetes.csv)
+- [Heart Diseases DataSet](https://github.com/Akshar106/Disease_Predictor/blob/main/All%20Datasets/heart.csv)
 
 
 
