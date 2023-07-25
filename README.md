@@ -8,6 +8,7 @@
 
 - [Diabetes DataSet](https://github.com/Akshar106/Disease_Predictor/blob/main/All%20Datasets/diabetes.csv)
 - [Heart Diseases DataSet](https://github.com/Akshar106/Disease_Predictor/blob/main/All%20Datasets/heart.csv)
+- [Pneumonia Detection](https://www.kaggle.com/datasets/tolgadincer/labeled-chest-xray-images)
 
 ## All Jupyter Notebook Files
 
