@@ -15,3 +15,4 @@
 
  - [Diabetes Prediction](https://github.com/Akshar106/Disease_Predictor/blob/main/All%20Jupyter%20Notebook%20Files/Diabetes_Prediction.ipynb)
  - [Heart Diseases Prediction](https://github.com/Akshar106/Disease_Predictor/blob/main/All%20Jupyter%20Notebook%20Files/Heart_Disease_Prediction.ipynb)
+ - [Brain Tumor Detection](https://github.com/Akshar106/Disease_Predictor/blob/main/All%20Jupyter%20Notebook%20Files/Brain_Tumor_Detection.ipynb)
