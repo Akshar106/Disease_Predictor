@@ -4,7 +4,7 @@ import os
 from PIL import Image,ImageOps
 import numpy as np
 import matplotlib.pyplot as plt
-import plotly.figure_factory as ff
+#import plotly.figure_factory as ff
 from sklearn.metrics import accuracy_score
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
@@ -16,6 +16,7 @@ from keras.models import Sequential
 from keras.layers import Dense, Flatten
 import cv2 as cv
 import tensorflow as tf
+import re
 
 
 
@@ -224,7 +225,7 @@ if selected == 'Diabetes Prediction':
         Glucose = st.sidebar.slider('Enter Your Glucose Level in (mg/dL)', 0, 400, 120, key=get_widget_key('Glucose'))
         BloodPressure = st.sidebar.slider('Enter Your Blood Pressure in (mm Hg)', 0, 122, 70, key=get_widget_key('BloodPressure'))
         SkinThickness = st.sidebar.slider('Enter Your Skin Thickness Value in (mm)', 0, 100, 20, key=get_widget_key('SkinThickness'))
-        Insulin = st.sidebar.slider('Enter Your Insulin Level in (mg /dL)', 0, 846, 79, key=get_widget_key('Insulin'))
+        Insulin = st.sidebar.slider('Enter Your Insulin Level in (mu U/ml)', 0, 846, 79, key=get_widget_key('Insulin'))
         BMI = st.sidebar.slider('Enter Your Body Mass Index (BMI) in kg/(height in m)^2)', 0.0, 67.0, 20.0, step=0.1, key=get_widget_key('BMI'))
         DiabetesPedigreeFunction = st.sidebar.slider('Enter Your Diabetes Pedigree Function Value', 0.0, 2.4, 0.47, key=get_widget_key('DPF'))
         Age = st.sidebar.slider('Enter Your Age', 21, 88, 33, key=get_widget_key('Age'))
@@ -279,33 +280,75 @@ if selected == 'Diabetes Prediction':
         insulin_level = user_data['Insulin'].iloc[0]
         bmi_value = user_data['BMI'].iloc[0]
 
-        #st.markdown("<h2 style='color: #FF5733';>Diabetes Checkup:</h2>", unsafe_allow_html=True)
-        #def generate_html_table(headers, data):
-            #html = "<table><tr>"
-            #for header in headers:
-                #html += f"<th style='color: #FF5733'>{header}</th>"
-            #html += "</tr><tr>"
-            #for value in data:
-             #   html += f"<td>{value}</td>"
-           # html += "</tr></table>"
-         #   return html
+       
+        gulcose_range = '70 - 99'
+        bp_range = '90/60 - 120/80'
+        insuline_range = '16 - 166'
+        bmi_range = '18.5 - 24.9'
+        if glucose_value < 70:
+            glucose_flag = 'Low'
+        elif glucose_value > 99:
+            glucose_flag = 'High'
+        else:
+            glucose_flag = 'Normal'
 
-# Example data
+        if bp_value < 60:
+            bp_flag = 'Low'
+        elif bp_value > 120:
+            bp_flag = 'High'
+        else:
+            bp_flag = 'Normal'
+
+        if insulin_level > 166:
+            insulin_flag = 'High'
+        elif insulin_level < 16 :
+            insulin_flag = 'Low'
+        else :
+            insulin_flag = 'Normal'
+
+        if bmi_value < 18.5:
+            bmi_flag = 'Low'
+        elif bmi_value > 24.9:
+            bmi_flag = 'High'
+        else:
+            bmi_flag = 'Normal'
+        
+
         data = {    
-        'Features' : ['Pregnancies', 'Glucose Level', 'Blood Pressure', 'Insulin Level', 'Body Mass Index'],
-        'Your Values' : [pregnancies_value, glucose_value, bp_value, insulin_level, bmi_value],
-        'Normal_Range' : ['-', '60 - 99  (mg/dL)', '90/60 - 120/80 (mm Hg)', '0 - 117  (mg/dL)', '18.5 - 24.9 (kg/m^2)']
+        'Features' : ['Glucose Level', 'Blood Pressure', 'Insulin Level', 'Body Mass Index'],
+        'Report Values' : [ glucose_value, bp_value, insulin_level, bmi_value],
+        'Status' : [ glucose_flag , bp_flag , insulin_flag , bmi_flag],
+        'Normal_Range' : [ gulcose_range, bp_range, insuline_range, bmi_range],
+        'Unit' : [ 'mg/dL' , 'mm Hg' , 'μU/mL' ,'kg/m^2']
         }
         
 
 # Combine the features, values, and normal range into a single line
+        
+
+# Display the formatted table using st.markdown
+        #st.subheader('Viz Starts Here')
+        def process_range(range_str):
+            match = re.findall(r'\d+\.\d+|\d+', range_str)
+            values = [float(val) for val in match]
+            return sum(values) / len(values)
+
+# Function to plot a specific feature
+        def plot_feature(feature_name, report_value, normal_range, unit):
+            plt.figure(figsize=(4, 3))
+            plt.bar(['Report Value', 'Normal Range'], [report_value, normal_range], color=['#FF7F50', 'g'])
+            plt.ylabel(f'{feature_name} ({unit})')
+            #plt.title(f'{feature_name} Report Value vs Normal Range')
+
+    # Show the chart within Streamlit
+            st.pyplot(plt)
         df = pd.DataFrame(data)
 
 # Convert DataFrame to tabular format with proper alignment and spacing
         def format_table(dataframe):
             html_table = "<table style='width:100%; text-align:center; border: 1px solid white; border-collapse: collapse;'>"
     # Header row
-            html_table += "<tr style='border: 1px solid white;'><th style='border: 1px solid white;color: #FF7F50;font-size: 30px;'>Features</th><th style='border: 1px solid white;color: #FF7F50;font-size: 30px;'>Values</th><th style='border: 1px solid white;color: #FF7F50;font-size: 30px;'>Normal Range</th></tr>"
+            html_table += "<tr style='border: 1px solid white;'><th style='border: 1px solid white;color: #FF7F50;font-size: 30px;'>Features</th><th style='border: 1px solid white;color: #FF7F50;font-size: 30px;'>Report Values</th><th style='border: 1px solid white;color: #FF7F50;font-size: 30px;'>Status<th style='border: 1px solid white;color: #FF7F50;font-size: 30px;'>Normal Range<th style='border: 1px solid white;color: #FF7F50;font-size: 30px;'>Units</th></tr>"
     # Data rows
             for index, row in dataframe.iterrows():
                 html_table += "<tr style='border: 1px solid white;'>"
@@ -314,10 +357,22 @@ if selected == 'Diabetes Prediction':
                 html_table += "</tr>"
             html_table += "</table>"
             return html_table
-
-# Display the formatted table using st.markdown
         st.markdown(format_table(df), unsafe_allow_html=True)
         st.write("<br>", unsafe_allow_html=True)
+
+  
+        for idx, feature_name in enumerate(data['Features']):
+                report_value = data['Report Values'][idx]
+                normal_range = process_range(data['Normal_Range'][idx])
+                unit = data['Unit'][idx]
+
+                st.markdown(f'<h3 style="color: #FF5733;"><em>{feature_name} Visualization</em></h3>', unsafe_allow_html=True)
+                plot_feature(feature_name, report_value, normal_range, unit)
+
+        
+       
+
+    
     # Show the "Click to know the type of Diabetes" button only when the user is predicted to have diabetes
     if user_result[0] == 1:
         
@@ -427,13 +482,124 @@ if selected == 'Diabetes Prediction':
 
 
 
-            elif diabetes_type == 'Type 2' :
-                st.subheader('What is Type 2 Diabetes : ')
+            elif diabetes_type == 'Type 2 Diabetes' :
+                st.markdown("<h2 style='color: #FF5733;'><em>What is Type 2 Diabetes?</em></h2>", unsafe_allow_html=True)
                 list_items = ['It is also known as "Non-Insulin-Dependent Diabetes".', 'Type 2 diabetes is the most common form of diabetes, accounting for approximately 90-95% of all diabetes cases.', 'It is characterized by insulin resistance, where the bodys cells do not respond properly to insulin, and impaired insulin secretion by the pancreas.', 'Type 2 diabetes is often associated with lifestyle factors such as obesity, physical inactivity, and unhealthy eating habits.' , 'It is more commonly diagnosed in adulthood, but the prevalence is increasing among younger populations due to rising obesity rates.']
                 # Create an unordered list using HTML tags
                 unordered_list = "<ul>" + "".join([f"<li>{item}</li>" for item in list_items]) + "</ul>"
                 # Display the unordered list using st.markdown()
                 st.markdown(unordered_list, unsafe_allow_html=True)
+                st.markdown("<h2 style='color: #FF5733;'><em>Symptoms of Type 2 Diabetes</em></h2>", unsafe_allow_html=True)
+                st.image('diabtype2.jpg')
+
+                st.markdown("<h2 style='color: #FF5733;'><em>How to control Type 2 Diabetes?</em></h2>", unsafe_allow_html=True)
+                st.write('Management of type 2 diabetes typically includes a combination of lifestyle changes, medication, and monitoring. Treatment goals aim to keep blood sugar levels within a target range to reduce the risk of complications.')
+                st.image('diabtype2control.png')
+                st.markdown("<h6 style='color:  #FF7F50;'><em>1 - Healthy Eating : </em></h6>", unsafe_allow_html=True)
+                list_items = [' Follow a well-balanced diet that focuses on whole foods, including vegetables, fruits, lean proteins, whole grains, and healthy fats.','Avoid sugary beverages, processed foods, and excessive consumption of refined carbohydrates.']
+                # Create an unordered list using HTML tags
+                unordered_list = "<ul>" + "".join([f"<li>{item}</li>" for item in list_items]) + "</ul>"
+                # Display the unordered list using st.markdown()
+                st.markdown(unordered_list, unsafe_allow_html=True)
+
+                st.markdown("<h6 style='color:  #FF7F50;'><em>2 - Portion Control : </em></h6>", unsafe_allow_html=True)
+                list_items = [' Be mindful of portion sizes to avoid overeating and help manage blood sugar levels.']
+                # Create an unordered list using HTML tags
+                unordered_list = "<ul>" + "".join([f"<li>{item}</li>" for item in list_items]) + "</ul>"
+                # Display the unordered list using st.markdown()
+                st.markdown(unordered_list, unsafe_allow_html=True)
+
+                st.markdown("<h6 style='color:  #FF7F50;'><em>3 - Regular Physical Activity : </em></h6>", unsafe_allow_html=True)
+                list_items = [' Engage in regular exercise, such as walking, swimming, cycling, or any other physical activity you enjoy.','Aim for at least 150 minutes of moderate-intensity aerobic activity per week, spread across several days.','Exercise helps improve insulin sensitivity and can aid in weight management.']
+                # Create an unordered list using HTML tags
+                unordered_list = "<ul>" + "".join([f"<li>{item}</li>" for item in list_items]) + "</ul>"
+                # Display the unordered list using st.markdown()
+                st.markdown(unordered_list, unsafe_allow_html=True)
+
+                st.markdown("<h6 style='color:  #FF7F50;'><em>4 - Weight Management : </em></h6>", unsafe_allow_html=True)
+                list_items = ['  If you are overweight or obese, losing weight can significantly improve your diabetes control. ','Even a modest weight loss of 5-10% of your body weight can make a difference.']
+                # Create an unordered list using HTML tags
+                unordered_list = "<ul>" + "".join([f"<li>{item}</li>" for item in list_items]) + "</ul>"
+                # Display the unordered list using st.markdown()
+                st.markdown(unordered_list, unsafe_allow_html=True)
+
+                st.markdown("<h6 style='color:  #FF7F50;'><em>5 - Monitor Blood Sugar Levels : </em></h6>", unsafe_allow_html=True)
+                list_items = ['  Regularly check your blood glucose levels as advised by your healthcare provider.  ',' This will help you understand how different foods, activities, and medications affect your blood sugar.']
+                # Create an unordered list using HTML tags
+                unordered_list = "<ul>" + "".join([f"<li>{item}</li>" for item in list_items]) + "</ul>"
+                # Display the unordered list using st.markdown()
+                st.markdown(unordered_list, unsafe_allow_html=True)
+
+                st.markdown("<h6 style='color:  #FF7F50;'><em>6 - Take Medications as Prescribed : </em></h6>", unsafe_allow_html=True)
+                list_items = [' If your doctor has prescribed medications, take them as instructed.  ',' This may include oral medications or insulin injections, depending on your individual needs.']
+                # Create an unordered list using HTML tags
+                unordered_list = "<ul>" + "".join([f"<li>{item}</li>" for item in list_items]) + "</ul>"
+                # Display the unordered list using st.markdown()
+                st.markdown(unordered_list, unsafe_allow_html=True)
+
+                st.markdown("<h6 style='color:  #FF7F50;'><em>7 - Stress Management : </em></h6>", unsafe_allow_html=True)
+                list_items = ['  Chronic stress can impact blood sugar levels. ','Practice relaxation techniques, such as deep breathing, meditation, yoga, or hobbies you enjoy.']
+                # Create an unordered list using HTML tags
+                unordered_list = "<ul>" + "".join([f"<li>{item}</li>" for item in list_items]) + "</ul>"
+                # Display the unordered list using st.markdown()
+                st.markdown(unordered_list, unsafe_allow_html=True)
+
+                st.markdown("<h6 style='color:  #FF7F50;'><em>8 - Quit Smoking and Limit Alcohol Intake : </em></h6>", unsafe_allow_html=True)
+                list_items = ['If you smoke, quitting can improve your overall health and diabetes management.',' If you drink alcohol, do so in moderation. ','Alcohol can cause blood sugar levels to fluctuate.']
+                # Create an unordered list using HTML tags
+                unordered_list = "<ul>" + "".join([f"<li>{item}</li>" for item in list_items]) + "</ul>"
+                # Display the unordered list using st.markdown()
+                st.markdown(unordered_list, unsafe_allow_html=True)
+
+                st.markdown("<h6 style='color:  #FF7F50;'><em>9 - Regular Check-ups : </em></h6>", unsafe_allow_html=True)
+                list_items = ['Schedule regular check-ups with your healthcare team, including your doctor, diabetes educator, and dietitian. ',' They can provide support and make adjustments to your treatment plan as needed.']
+                # Create an unordered list using HTML tags
+                unordered_list = "<ul>" + "".join([f"<li>{item}</li>" for item in list_items]) + "</ul>"
+                # Display the unordered list using st.markdown()
+                st.markdown(unordered_list, unsafe_allow_html=True)
+
+                
+                st.markdown("<h2 style='color: #FF5733;'><em>Which Medicine one should take to Control Type 2 Diabetes?</em></h2>", unsafe_allow_html=True)
+                st.write('The choice of medication for controlling type 2 diabetes depends on various factors, including the individuals overall health, blood sugar levels, response to lifestyle changes, and the presence of other medical conditions. The decision is made by a healthcare provider, typically a doctor or endocrinologist, after a thorough evaluation of the patients condition.')
+                st.write(' Here are some common types of medications used to treat type 2 diabetes :')
+
+                st.markdown("<h6 style='color:  #FF7F50;'><em>1 - Metformin : </em></h6>", unsafe_allow_html=True)
+                st.write('Metformin is often the first-line medication for type 2 diabetes. It works by reducing the livers glucose production and improving insulin sensitivity in the body. Metformin is usually well-tolerated and has a long safety record.')
+
+                st.markdown("<h6 style='color:  #FF7F50;'><em>2 - Sulfonylureas : </em></h6>", unsafe_allow_html=True)
+                st.write('hese medications stimulate the pancreas to produce more insulin. Examples include gliclazide, glipizide, and glyburide. They can be effective but may cause hypoglycemia (low blood sugar) if not taken correctly.')
+
+                st.markdown("<h6 style='color:  #FF7F50;'><em>3 - Meglitinides : </em></h6>", unsafe_allow_html=True)
+                st.write(' Similar to sulfonylureas, meglitinides stimulate insulin release from the pancreas but have a shorter duration of action. Repaglinide and nateglinide are examples of meglitinides.')
+
+                st.markdown("<h6 style='color:  #FF7F50;'><em>4 - Dipeptidyl Peptidase-4 (DPP-4) Inhibitors : </em></h6>", unsafe_allow_html=True)
+                st.write('DPP-4 inhibitors help increase insulin production and reduce glucose production by blocking the action of the DPP-4 enzyme. Sitagliptin, saxagliptin, and linagliptin are common DPP-4 inhibitors.')
+
+                st.markdown("<h6 style='color:  #FF7F50;'><em>5 - Thiazolidinediones (TZDs) : </em></h6>", unsafe_allow_html=True)
+                st.write('TZDs improve insulin sensitivity in muscle and fat tissues. Pioglitazone and rosiglitazone are examples of TZDs. However, TZDs have some side effects and are usually not used as first-line therapy.')
+
+                st.markdown("<h6 style='color:  #FF7F50;'><em>6 - SGLT-2 Inhibitors : </em></h6>", unsafe_allow_html=True)
+                st.write('Sodium-glucose co-transporter 2 (SGLT-2) inhibitors work by reducing glucose reabsorption in the kidneys, leading to increased glucose excretion in the urine. Canagliflozin, dapagliflozin, and empagliflozin are common SGLT-2 inhibitors.')
+
+                st.markdown("<h6 style='color:  #FF7F50;'><em>7 - GLP-1 Receptor Agonists : </em></h6>", unsafe_allow_html=True)
+                st.write('Glucagon-like peptide-1 (GLP-1) receptor agonists stimulate insulin secretion, suppress glucagon release, slow down gastric emptying, and promote satiety. They are administered as injections. Examples include exenatide, liraglutide, and dulaglutide.')
+
+                st.markdown("<h6 style='color:  #FF7F50;'><em>8 - Insulin : </em></h6>", unsafe_allow_html=True)
+                st.write('In some cases, when other medications are not sufficient to control blood sugar levels, insulin therapy may be prescribed. There are various types of insulin with different durations of action, such as rapid-acting, short-acting, intermediate-acting, and long-acting insulin.')
+
+                st.markdown("<h4 style='color:  #FF7F50;'><em>Note : </em></h6>", unsafe_allow_html=True)
+                st.write('It is essential to work closely with your healthcare provider to determine the most appropriate medication for you. The treatment plan may involve a combination of medications or adjustments over time, depending on your response to treatment and changes in your health status.')
+
+                st.markdown("<h2 style='color: #FF5733;'><em>How to control Type 1 Diabetes without Medicines?</em></h2>", unsafe_allow_html=True)
+                st.image('diabtype2withoutmedicine.jpg')
+
+                st.markdown('For More Information of Type 2 Diabetes : [Click Here](https://www.mayoclinic.org/diseases-conditions/type-2-diabetes/symptoms-causes/syc-20351193)')
+
+
+
+
+
+
 
 
             elif diabetes_type == 'Type 3':
@@ -534,80 +700,17 @@ if selected == 'Heart Diseases Prediction':
             diab_diagnosis = 'You are Having Heart Diseases. Immediately Consult a Doctor'
     st.success(diab_diagnosis)
 # VISUALIZATIONS
-    st.title('Visualised Patient Report')
+    #st.title('Visualised Patient Report')
 
 # COLOR FUNCTION
-    if user_result[0] == 0:
-            color = 'blue'
-    else:
-        color = 'red'
+    #if user_result[0] == 0:
+            #color = 'blue'
+  #  else:
+#        color = 'red'
 
 #Age vs Maximum Heart Rate
 
-    st.subheader('Maximum Heart Rate count Graph (Others vs Yours)')
-    fig_preg = plt.figure()
-    ax1 = sns.scatterplot(x='age', y='thalach', data=df, hue='target', palette='Greens')
-    ax2 = sns.scatterplot(x=user_data['age'], y=user_data['thalach'], s=150, color=color)
-    plt.xticks(np.arange(10, 100, 5))
-    plt.yticks(np.arange(50, 200, 10))
-    plt.title('0 - Healthy & 1 - Unhealthy')
-    st.pyplot(fig_preg)
-
-#Age vs. Resting Blood Pressure
-
-    st.subheader('Resting Blood Pressure count graph (Others vs Yours)')
-    fig_preg = plt.figure()
-    ax1 = sns.scatterplot(x = 'age' , y='trestbps' , data=df,hue='target', palette='Greens')
-    ax2 = sns.scatterplot(x=user_data['age'], y=user_data['trestbps'], s=150, color=color)
-    plt.xticks(np.arange(10, 100, 5))
-    plt.yticks(np.arange(0, 1 ,1))
-    plt.title('0 - Healthy & 1 - Unhealthy')
-    st.pyplot(fig_preg)
-
-#Age vs. Serum Cholestoral (Cholesterol)
-
-    st.subheader('Serum Cholestoral count graph (Others vs Yours)')
-    fig_preg = plt.figure()
-    ax1 = sns.scatterplot(x = 'age' , y='chol' , data=df,hue='target', palette='Greens')
-    ax2 = sns.scatterplot(x=user_data['age'], y=user_data['chol'], s=150, color=color)
-    plt.xticks(np.arange(10, 100, 5))
-    plt.yticks(np.arange(100, 500, 50))
-    plt.title('0 - Healthy & 1 - Unhealthy')
-    st.pyplot(fig_preg)
-
-#Resting Blood Pressure vs. Serum Cholestoral (Cholesterol)
-
-    st.subheader('Resting Blood Pressure vs. Serum Cholestoral (Cholesterol) count graph (Others vs Yours)')
-    fig_preg = plt.figure()
-    ax1 = sns.scatterplot(x = 'trestbps' , y='chol' , data=df,hue='target', palette='Greens')
-    ax2 = sns.scatterplot(x=user_data['trestbps'], y=user_data['chol'], s=150, color=color)
-    plt.xticks(np.arange(10, 200, 10))
-    plt.yticks(np.arange(100, 600, 50))
-    plt.title('0 - Healthy & 1 - Unhealthy')
-    st.pyplot(fig_preg)
-
-#Resting Blood Pressure vs. Maximum Heart Rate Achieved
-
-    st.subheader('Resting Blood Pressure vs. Maximum Heart Rate  count graph (Others vs Yours)')
-    fig_preg = plt.figure()
-    ax1 = sns.scatterplot(x = 'trestbps' , y='thalach' , data=df,hue='target', palette='Greens')
-    ax2 = sns.scatterplot(x=user_data['trestbps'], y=user_data['thalach'], s=150, color=color)
-    plt.xticks(np.arange(10, 200, 10))
-    plt.yticks(np.arange(50, 200, 10))
-    plt.title('0 - Healthy & 1 - Unhealthy')
-    st.pyplot(fig_preg)
-
-#Serum Cholestoral (Cholesterol) vs. Maximum Heart Rate Achieved
-
-    st.subheader('Serum Cholestoral (Cholesterol) vs. Maximum Heart Rate Achieved count graph (Others vs Yours)')
-    fig_preg = plt.figure()
-    ax1 = sns.scatterplot(x = 'chol' , y='thalach' , data=df,hue='target', palette='Greens')
-    ax2 = sns.scatterplot(x=user_data['chol'], y=user_data['thalach'], s=150, color=color)
-    plt.xticks(np.arange(100, 600, 50))
-    plt.yticks(np.arange(50, 200, 10))
-    plt.title('0 - Healthy & 1 - Unhealthy')
-    st.pyplot(fig_preg)
-
+    
 
 # OUTPUT
     
@@ -655,8 +758,9 @@ if selected == 'Brain Tumor Detection':
 
     # Map prediction label to human-readable class name
         if prediction[0] == 0:
-            predicted_class = 'No Tumor'
-        else:            predicted_class = 'Positive Tumor'
+            predicted_class = 'You Have No Brain Tumor'
+        else:  
+            predicted_class = 'You have Positive Tumor. Immediately Consult a Doctor.'
 
         return predicted_class
 
@@ -703,8 +807,13 @@ if selected == 'Pneumonia Detection':
         img = cv.resize(img, (256, 256))
         img = np.expand_dims(img, axis=0)  # Add batch dimension
         pred_probability = model.predict(img)
-        return pred_probability[0][0]  # Return the probability value
-
+        # Return the probability value
+        if st.button('Predict'):
+            if pred_probability > 0.5:
+                st.write("Prediction: You have Pneumonia. Please Consult a Doctor.")
+            else:
+                st.write("Prediction: You are Normal")
+        return pred_probability[0][0]  
 
     def main():
         #st.title("Pneumonia Detection Web App")
@@ -723,16 +832,13 @@ if selected == 'Pneumonia Detection':
             model = tf.keras.models.load_model('Pneumonia_detection_model.h5')
 
         # Make prediction
+            st.image(image, caption="Uploaded Image", use_column_width=True)
             pred_probability = predict_pneumonia(model, image)
 
-            st.image(image, caption="Uploaded Image", use_column_width=True)
+            
 
         # Display prediction result
-        if st.button('Predict'):
-            if pred_probability > 0.5:
-                st.write("Prediction: You have Pneumonia. Please Consult a Doctor.")
-            else:
-                st.write("Prediction: You are Normal")
+        
 
             
         
