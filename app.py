@@ -834,13 +834,6 @@ if selected == 'Pneumonia Detection':
         # Make prediction
             st.image(image, caption="Uploaded Image", use_column_width=True)
             pred_probability = predict_pneumonia(model, image)
-
-            
-
-        # Display prediction result
-        
-
-            
-        
+     
     if __name__ == "__main__":
         main()
