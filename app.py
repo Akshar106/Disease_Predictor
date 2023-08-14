@@ -169,7 +169,6 @@ if selected == 'Home':
 
 
 if selected == 'Diabetes Prediction':
-# Read the dataset
     df = pd.read_csv('diabetes-dataset.csv')
 
 # HEADINGS
@@ -251,10 +250,7 @@ if selected == 'Diabetes Prediction':
     user_data = user_report()
     st.markdown("<h3 style='color: #FF7F50;'><em>Patient Data : </em></h3>", unsafe_allow_html=True)
     st.write(user_data)
-    
-    #st.markdown("<h3 style='color: #FF7F50;'><em>Patient Data : </em></h3>", unsafe_allow_html=True)
-    #st.write(user_data)
-
+   
 # MODEL
     rf = RandomForestClassifier()
     rf.fit(x_train, y_train)
