@@ -103,18 +103,13 @@ if selected == 'Home':
 
             st.markdown("<h2 style='color: #FF5733';><em>Symptoms :</em></h2>", unsafe_allow_html=True)
             st.image('heartsymptoms.jpg')
-            #list_items = ['Chest Pain or Discomfort.', 'Shortness of Breath.', 'Fatigue.', 'Dizziness and Fainting.' , 'Swelling.' ' Cold Sweats.']
-                # Create an unordered list using HTML tags
-            #unordered_list = "<ul>" + "".join([f"<li>{item}</li>" for item in list_items]) + "</ul>"
-                # Display the unordered list using st.markdown()
-            #st.markdown(unordered_list, unsafe_allow_html=True)
-
+        
             st.markdown("<h2 style='color: #FF5733';><em>How to control Heart Diseases :</em></h2>", unsafe_allow_html=True)
 
             list_items = ['Preventive measures for heart diseases include adopting a healthy lifestyle, including regular exercise, a balanced diet, avoiding smoking and excessive alcohol consumption, and managing stress. ', 'Early detection, proper medical management, and following a healthcare providers recommendations are crucial in reducing the risk of complications associated with heart diseases', 'Regular check-ups and screenings can help identify risk factors and underlying conditions, enabling timely intervention and better management of heart health.']
-                # Create an unordered list using HTML tags
+                
             unordered_list = "<ul>" + "".join([f"<li>{item}</li>" for item in list_items]) + "</ul>"
-                # Display the unordered list using st.markdown()
+                
             st.markdown(unordered_list, unsafe_allow_html=True)
 
             st.markdown('For More Information : [Click Here](https://www.cdc.gov/heartdisease/index.htm)')
