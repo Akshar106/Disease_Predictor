@@ -17,12 +17,9 @@ from keras.layers import Dense, Flatten
 import cv2 as cv
 import tensorflow as tf
 import re
-
-
-
 import joblib
 import cv2
-#👋
+
 with st.sidebar:
     
     selected = option_menu('Multiple Disease Prediction System',
