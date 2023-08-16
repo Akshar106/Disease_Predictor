@@ -54,8 +54,6 @@ if selected == 'Home':
             #st.write('1. **Type 1 Diabetes:** This is an autoimmune condition where the bodys immune system attacks and destroys the insulin-producing cells in the pancreas. As a result, people with Type 1 diabetes require insulin injections or an insulin pump to manage their blood sugar levels.')
             #st.write('2. **Type 2 Diabetes:** This is the most common form of diabetes and is typically associated with lifestyle factors such as obesity, physical inactivity, and unhealthy eating habits. In Type 2 diabetes, the body becomes resistant to insulin, and the pancreas may not produce enough insulin to compensate. It can often be managed through lifestyle changes, medication, and, in some cases, insulin therapy.')
             st.markdown("<h2 style='color: #FF5733';><em>Symptoms :</em></h2>", unsafe_allow_html=True)
-            #st.title('Unordered List Example')
-            # List items for the unordered list
             st.image('diabhomesymptoms.jpg')
             st.markdown("<h2 style='color: #FF5733';><em>How to manage Diabetes :</em></h2>", unsafe_allow_html=True)
             list_items = ['Managing diabetes involves a combination of lifestyle modifications, regular blood sugar monitoring, medications, and in some cases, insulin therapy.', 'Proper management helps prevent complications and allows individuals with diabetes to lead healthy and active lives.', 'It is essential for people with diabetes to work closely with healthcare professionals to develop a personalized diabetes management plan that includes a balanced diet, regular exercise, and self-monitoring of blood sugar levels.', 'Education and support from healthcare providers can empower individuals with diabetes to make informed decisions about their health and well-being.']
@@ -81,17 +79,11 @@ if selected == 'Home':
             st.write('6. **Craniopharyngiomas**: Craniopharyngiomas are rare, usually benign tumors that form near the pituitary gland. They can cause various hormonal imbalances and may affect vision and other functions.')
             st.markdown("<h2 style='color: #FF5733';><em>Symptoms :</em></h2>", unsafe_allow_html=True)
             st.image('braintumorsymptoms.jpg')
-            #list_items = ['Headaches.', 'Seizures.', 'Nausea and vomiting.', 'Cognitive and personality changes.', 'Vision problems.' , 'Speech difficulties.' , 'Weakness or numbness.' , 'Changes in sensation' , 'Fatigue.']
-            # Create an unordered list using HTML tags
-            #unordered_list = "<ul>" + "".join([f"<li>{item}</li>" for item in list_items]) + "</ul>"
-            # Display the unordered list using st.markdown()
-            #st.markdown(unordered_list, unsafe_allow_html=True)
-
+        
             st.markdown("<h2 style='color: #FF5733';><em>How to manage Brain Tumor :</em></h2>", unsafe_allow_html=True)
             list_items = ['Managing a brain tumor typically involves a multidisciplinary approach.', 'Accurate diagnosis is essential for determining the type, size, location, and grade of the tumor. This is usually done through imaging techniques like MRI or CT scans, along with a biopsy, if necessary.', 'Seek help from a team of medical professionals experienced in brain tumor treatment. This may include neurologists, neuro-oncologists, neurosurgeons, radiation oncologists and other specialists.', 'Surgery : In some cases, surgery may be performed to remove as much of the tumor as possible without causing damage to critical brain regions.', 'Radation Therapy : herapyRadation therapy uses hight-energy X-rays to target and destroy tumor cells. It is often used after surgery to trat any remaining tumor cells or as the primary treatment for tumors that are difficult to remove surgically.' , 'Chemotherapy : Chemotherapy involves using drugs to kill or slow the growth of cancer cells. It can be administered orally or intravenously and may be used in conbination with other treatments.' , 'Immunotherapy : Immuno Therapy aims to boost the bodys immune system to recognize and attack cancer cells. It is an area of ongoing research and may be used in some cases.' , 'Clinical Trails : Clinical trials offer oppurtunities to access new treatments and therapies that are still being researched. Patients and their medical tema may consider participating in appropriate clinical trials.' , 'Regular follow up appointments are crucial to monitor the tumors progress and the patients overall health. Adjustments to the treatment plan may be based on the tumors response to the therapy.']
 
             unordered_list = "<ul>" + "".join([f"<li>{item}</li>" for item in list_items]) + "</ul>"
-            # Display the unordered list using st.markdown()
             st.markdown(unordered_list, unsafe_allow_html=True)
 
             st.markdown('For More Information : [Click Here](https://www.cancer.gov/types/brain)')
