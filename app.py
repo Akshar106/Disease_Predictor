@@ -319,7 +319,6 @@ if selected == 'Diabetes Prediction':
             st.pyplot(plt)
         df = pd.DataFrame(data)
 
-# Convert DataFrame to tabular format with proper alignment and spacing
         def format_table(dataframe):
             html_table = "<table style='width:100%; text-align:center; border: 1px solid white; border-collapse: collapse;'>"
     # Header row
@@ -344,11 +343,6 @@ if selected == 'Diabetes Prediction':
                 st.markdown(f'<h3 style="color: #FF5733;"><em>{feature_name} Visualization</em></h3>', unsafe_allow_html=True)
                 plot_feature(feature_name, report_value, normal_range, unit)
 
-        
-       
-
-    
-    # Show the "Click to know the type of Diabetes" button only when the user is predicted to have diabetes
     if user_result[0] == 1:
         
         if st.button('Click to know the type of Diabetes'):
