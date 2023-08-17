@@ -303,11 +303,6 @@ if selected == 'Diabetes Prediction':
         }
         
 
-# Combine the features, values, and normal range into a single line
-        
-
-# Display the formatted table using st.markdown
-        #st.subheader('Viz Starts Here')
         def process_range(range_str):
             match = re.findall(r'\d+\.\d+|\d+', range_str)
             values = [float(val) for val in match]
