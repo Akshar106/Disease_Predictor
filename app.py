@@ -129,11 +129,6 @@ if selected == 'Home':
 
             st.markdown("<h2 style='color: #FF5733';><em>Symptoms :</em></h2>", unsafe_allow_html=True)
             st.image('pneusymptoms.jpg')
-            #list_items = ['Cough.', 'Fever.', 'Shortness of breath.', 'Chest pain.' , 'Fatigue.' 'Sweating and shaking.']
-                # Create an unordered list using HTML tags
-            #unordered_list = "<ul>" + "".join([f"<li>{item}</li>" for item in list_items]) + "</ul>"
-                # Display the unordered list using st.markdown()
-            #st.markdown(unordered_list, unsafe_allow_html=True)
 
             st.markdown("<h2 style='color: #FF5733';><em>How to control Pneumonia :</em></h2>", unsafe_allow_html=True)
             list_items = ['Vaccines are an essential part of pneumonia prevention. Getting vaccinated can protect against specific pathogens that cause pneumonia, especially in high-risk populations.', ' Proper handwashing with soap and water, especially after coughing or sneezing, can reduce the spread of viruses and bacteria that cause respiratory infections, including pneumonia.', 'Smoking damages the lungs and weakens the bodys defense against respiratory infections. Avoiding smoking and exposure to secondhand smoke can lower the risk of pneumonia.', 'Eating a balanced diet, staying physically active, and getting enough sleep can help strengthen the immune system, making the body better equipped to fight off infections.' , 'o prevent aspiration pneumonia, especially in vulnerable individuals such as the elderly or those with swallowing difficulties, it is essential to take precautions while eating and drinking. These precautions may include sitting upright while eating, eating slowly, and avoiding lying down immediately after eating.' 'Infants, young children, older adults, pregnant women, and individuals with weakened immune systems are at higher risk for pneumonia. Extra care and preventive measures should be taken for these groups.','For individuals with chronic health conditions such as diabetes, heart disease, or lung disease, managing these conditions effectively can reduce the risk of pneumonia.','In indoor environments, ensuring good ventilation and air quality can help reduce the risk of respiratory infections.']
