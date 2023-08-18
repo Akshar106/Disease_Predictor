@@ -403,12 +403,6 @@ if selected == 'Diabetes Prediction':
                 # Display the unordered list using st.markdown()
                 st.markdown(unordered_list, unsafe_allow_html=True)
 
-
-                #st.markdown("<h2 style='color: lightgreen;'>This is a light green subheader</h2>", unsafe_allow_html=True)
-                #st.markdown("<p style='color: yellow;'>This is a green text</p>", unsafe_allow_html=True)
-
-
-
                 st.markdown("<h2 style='color: #FF5733;'><em>Which Medicine one should take to Control Type 1 Diabetes?</em></h2>", unsafe_allow_html=True)
                 st.write('Type 1 diabetes is a condition where the body does not produce insulin, so insulin therapy is the primary and essential treatment for individuals with Type 1 diabetes.')
                 st.write('There is no medication that can replace the need for insulin in people with Type 1 diabetes. Insulin is crucial for regulating blood glucose levels and allowing glucose to enter cells for energy.')
