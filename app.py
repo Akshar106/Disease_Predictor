@@ -436,12 +436,7 @@ if selected == 'Diabetes Prediction':
 
                 st.markdown("<h2 style='color: #FF5733;'><em>How to control Type 1 Diabetes without Medicines?</em></h2>", unsafe_allow_html=True)
                 st.image('diabcontrolwithoutmedicine.jpg')
-                #list_items = ['Eliminate Refined Carbohydrates from Diet.','Feed on to low Glcaemic Foods.','Drink Enough Water.','Avoid Stress.','Get Adequate Sleep.','Avoid Smoking']
-                # Create an unordered list using HTML tags
-                #unordered_list = "<ul>" + "".join([f"<li>{item}</li>" for item in list_items]) + "</ul>"
-                # Display the unordered list using st.markdown()
-                #t.markdown(unordered_list, unsafe_allow_html=True)
-                
+           
                 st.markdown("<h3 style='color:  #FFC175;'><em>Note : </em></h2>", unsafe_allow_html=True)
                 st.write('It is essential for individuals with Type 1 diabetes to work closely with their healthcare providers to determine the most appropriate type of insulin, dosing regimen, and timing based on their individual needs, lifestyle, and blood glucose monitoring results. Insulin doses may need to be adjusted based on factors such as carbohydrate intake, physical activity, stress levels, and illness.')
                 
