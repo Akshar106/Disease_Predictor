@@ -449,9 +449,9 @@ if selected == 'Diabetes Prediction':
                 st.image('diabtype2control.png')
                 st.markdown("<h6 style='color:  #FF7F50;'><em>1 - Healthy Eating : </em></h6>", unsafe_allow_html=True)
                 list_items = [' Follow a well-balanced diet that focuses on whole foods, including vegetables, fruits, lean proteins, whole grains, and healthy fats.','Avoid sugary beverages, processed foods, and excessive consumption of refined carbohydrates.']
-                # Create an unordered list using HTML tags
+                
                 unordered_list = "<ul>" + "".join([f"<li>{item}</li>" for item in list_items]) + "</ul>"
-                # Display the unordered list using st.markdown()
+                
                 st.markdown(unordered_list, unsafe_allow_html=True)
 
                 st.markdown("<h6 style='color:  #FF7F50;'><em>2 - Portion Control : </em></h6>", unsafe_allow_html=True)
