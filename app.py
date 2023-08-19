@@ -51,8 +51,7 @@ if selected == 'Home':
             st.write('Diabetes is a chronic medical condition characterized by high levels of glucose (sugar) in the blood. It occurs when the body either does not produce enough insulin (a hormone that regulates blood sugar) or is unable to effectively use the insulin it produces. As a result, glucose accumulates in the bloodstream, leading to various health complications.')
             st.markdown("<h2 style='color: #FF5733';><em>There are two primary types of Diabetes :</em></h2>", unsafe_allow_html=True)
             st.image('diabtypes.png')
-            #st.write('1. **Type 1 Diabetes:** This is an autoimmune condition where the bodys immune system attacks and destroys the insulin-producing cells in the pancreas. As a result, people with Type 1 diabetes require insulin injections or an insulin pump to manage their blood sugar levels.')
-            #st.write('2. **Type 2 Diabetes:** This is the most common form of diabetes and is typically associated with lifestyle factors such as obesity, physical inactivity, and unhealthy eating habits. In Type 2 diabetes, the body becomes resistant to insulin, and the pancreas may not produce enough insulin to compensate. It can often be managed through lifestyle changes, medication, and, in some cases, insulin therapy.')
+           
             st.markdown("<h2 style='color: #FF5733';><em>Symptoms :</em></h2>", unsafe_allow_html=True)
             st.image('diabhomesymptoms.jpg')
             st.markdown("<h2 style='color: #FF5733';><em>How to manage Diabetes :</em></h2>", unsafe_allow_html=True)
