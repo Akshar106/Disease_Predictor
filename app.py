@@ -651,14 +651,7 @@ if selected == 'Heart Diseases Prediction':
         else:
             diab_diagnosis = 'You are Having Heart Diseases. Immediately Consult a Doctor'
     st.success(diab_diagnosis)
-# VISUALIZATIONS
-    #st.title('Visualised Patient Report')
 
-# COLOR FUNCTION
-    #if user_result[0] == 0:
-            #color = 'blue'
-  #  else:
-#        color = 'red'
 
 #Age vs Maximum Heart Rate
 
