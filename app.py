@@ -369,7 +369,7 @@ if selected == 'Diabetes Prediction':
 
                 st.markdown("<h6 style='color:  #FF7F50;'><em>2 - Blood Glucose Monitoring : </em></h6>", unsafe_allow_html=True)
                 list_items = ['Regular monitoring of blood glucose levels is crucial for managing Type 1 diabetes.', 'This helps in understanding how different factors, such as food, physical activity, and stress, affect blood sugar levels.', 'Continuous Glucose Monitoring (CGM) devices can provide real-time glucose readings, which offer better control and prevent severe high or low blood sugar episodes.']
-                # Create an unordered list using HTML tags
+              
                 unordered_list = "<ul>" + "".join([f"<li>{item}</li>" for item in list_items]) + "</ul>"
                 # Display the unordered list using st.markdown()
                 st.markdown(unordered_list, unsafe_allow_html=True)
