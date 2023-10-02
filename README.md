@@ -17,3 +17,5 @@
  - [Heart Diseases Prediction](https://github.com/Akshar106/Disease_Predictor/blob/main/All%20Jupyter%20Notebook%20Files/Heart_Disease_Prediction.ipynb)
  - [Brain Tumor Detection](https://github.com/Akshar106/Disease_Predictor/blob/main/All%20Jupyter%20Notebook%20Files/Brain_Tumor_Detection.ipynb)
  - [Pneumonia Detection](https://github.com/Akshar106/Disease_Predictor/blob/main/All%20Jupyter%20Notebook%20Files/Pneumonia_Detection.ipynb)
+
+![image](https://github.com/Akshar106/Disease_Predictor/assets/109402115/5e1aa99e-00e7-4b3f-b4f9-86339bdf76e6)
