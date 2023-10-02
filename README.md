@@ -20,4 +20,8 @@
 
 ## Here's the overview of the Website
 
+### Home Page : 
 ![image](https://github.com/Akshar106/Disease_Predictor/assets/109402115/5e1aa99e-00e7-4b3f-b4f9-86339bdf76e6)
+
+### Diabetes Prediction : 
+![image](https://github.com/Akshar106/Disease_Predictor/assets/109402115/593121db-4b8a-40a5-9656-f9714e9f57ad)
