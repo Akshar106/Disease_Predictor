@@ -25,3 +25,5 @@
 
 ### Diabetes Prediction : 
 ![image](https://github.com/Akshar106/Disease_Predictor/assets/109402115/593121db-4b8a-40a5-9656-f9714e9f57ad)
+![image](https://github.com/Akshar106/Disease_Predictor/assets/109402115/8743e816-4adb-4c46-b4dc-ba6ca8dcc748)
+
