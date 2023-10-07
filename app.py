@@ -304,9 +304,7 @@ if selected == 'Diabetes Prediction':
             plt.figure(figsize=(4, 3))
             plt.bar(['Report Value', 'Normal Range'], [report_value, normal_range], color=['#FF7F50', 'g'])
             plt.ylabel(f'{feature_name} ({unit})')
-            #plt.title(f'{feature_name} Report Value vs Normal Range')
-
-    # Show the chart within Streamlit
+       
             st.pyplot(plt)
         df = pd.DataFrame(data)
 
