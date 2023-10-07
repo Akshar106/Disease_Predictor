@@ -4,7 +4,6 @@ import os
 from PIL import Image,ImageOps
 import numpy as np
 import matplotlib.pyplot as plt
-#import plotly.figure_factory as ff
 from sklearn.metrics import accuracy_score
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
@@ -56,7 +55,7 @@ if selected == 'Home':
             st.image('diabhomesymptoms.jpg')
             st.markdown("<h2 style='color: #FF5733';><em>How to manage Diabetes :</em></h2>", unsafe_allow_html=True)
             list_items = ['Managing diabetes involves a combination of lifestyle modifications, regular blood sugar monitoring, medications, and in some cases, insulin therapy.', 'Proper management helps prevent complications and allows individuals with diabetes to lead healthy and active lives.', 'It is essential for people with diabetes to work closely with healthcare professionals to develop a personalized diabetes management plan that includes a balanced diet, regular exercise, and self-monitoring of blood sugar levels.', 'Education and support from healthcare providers can empower individuals with diabetes to make informed decisions about their health and well-being.']
-            # Create an unordered list using HTML tags
+         
             unordered_list = "<ul>" + "".join([f"<li>{item}</li>" for item in list_items]) + "</ul>"
             # Display the unordered list using st.markdown()
             st.markdown(unordered_list, unsafe_allow_html=True)
@@ -86,8 +85,6 @@ if selected == 'Home':
             st.markdown(unordered_list, unsafe_allow_html=True)
 
             st.markdown('For More Information : [Click Here](https://www.cancer.gov/types/brain)')
-  
-  
   
         elif selected_option == 'Heart Diseases':
             st.markdown("<h2 style='color: #FF5733';><em>Heart Diseases :</em></h2>", unsafe_allow_html=True)
